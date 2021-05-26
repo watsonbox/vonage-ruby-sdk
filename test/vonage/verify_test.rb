@@ -33,9 +33,12 @@ class Vonage::VerifyTest < Vonage::Test
 
     assert_kind_of Vonage::Response, verify.request(params)
 
-    assert_raises Vonage::Error do
+    error = assert_raises Vonage::Error do
       verify.request(params)
     end
+
+    assert_kind_of Vonage::Response, error.response
+    assert_equal error.response.status, "101"
   end
 
   def test_check_method

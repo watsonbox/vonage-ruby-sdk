@@ -64,7 +64,7 @@ module Vonage
     def request(params, uri = '/verify/json')
       response = http_request(uri, params: params, type: Post)
 
-      raise Error, response[:error_text] if error?(response)
+      raise Error.new(response), response[:error_text] if error?(response)
 
       response
     end
